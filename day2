@@ -1,0 +1,68 @@
+//string to integer(leetcode)
+
+
+         if(s.size() == 0)
+            return 0;
+        
+        //to eliminate leading whitespaces
+        int i=0;
+        while(i<s.size() && s[i] == ' ')
+            i++;
+        s = s.substr(i); //from ith index ---> end of the string
+        
+        //checking for sign
+        int sign = 1;
+        long ans = 0;
+        if(s[0] == '-')
+            sign = -1;
+        
+        int max = INT_MAX, min = INT_MIN;
+        //if -ve or +ve sign was present then we have to start from 1st index otherwise from oth index only
+        i = (s[0] == '-' || s[0] == '+') ? 1 : 0; 
+        
+        while(i < s.size())
+        {
+            if(s[i] == ' ' || !isdigit(s[i]))   //if there is empty space or some character occurs then break
+                break;
+            
+            ans = ans*10 + (s[i] - '0');
+            if(sign == 1 && ans>max)
+                return max;
+            if(sign == -1 && -ans < min)
+                return min;
+            
+            i++;
+        }
+        return ans*sign;
+        
+    }
+    
+    
+    //replace pi recursively
+    
+    
+    
+    #include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+void replacePi(char input[]) {
+    int n=strlen(input);
+    if(n==0 || n==1) return;
+    if(input[0]=='p' && input[1]=='i'){
+         for(int i=n-1;i>=2;i--){
+        input[i+2]=input[i];
+        }
+     input[0] = '3';
+        input[ 1] = '.';
+        input[ 2] = '1';
+        input[ 3] = '4';
+    }
+    replacePi(input+1);
+   
+}
+int main() {
+    char input[10000];
+    cin.getline(input, 10000);
+    replacePi(input);
+    cout << input << endl;
+}
