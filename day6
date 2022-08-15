@@ -1,0 +1,132 @@
+//spiral order print
+//{ Driver Code Starts
+#include <bits/stdc++.h> 
+using namespace std; 
+
+// } Driver Code Ends
+class Solution
+{   
+    public: 
+    //Function to return a list of integers denoting spiral traversal of matrix.
+    vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
+    {
+        // code here 
+        vector<int>ans;
+        int row_start=0;
+        int row_end=r-1;
+        int col_start=0;
+        int col_end=c-1;
+        int total=r*c;
+        int count =0;
+        while(count<total)
+    {
+        for(int i=col_start; count<total &&i<=col_end;i++){
+            ans.push_back(matrix[row_start][i]);
+            count++;
+        }
+        row_start++;
+        for(int i=row_start; count<total && i<=row_end;i++){
+            ans.push_back(matrix[i][col_end]);
+            count++;
+        }
+        col_end--;
+        for(int i=col_end;count<total&&i>=col_start;i--){
+            ans.push_back(matrix[row_end][i]);
+            count++;
+        }
+        row_end--;
+        for(int i=row_end ; count<total&&i>=row_start;i--){
+            ans.push_back(matrix[i][col_start]);
+            count++;
+        }
+        col_start++;
+    }
+        return ans;
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin>>t;
+    
+    while(t--) 
+    {
+        int r,c;
+        cin>>r>>c;
+        vector<vector<int> > matrix(r); 
+
+        for(int i=0; i<r; i++)
+        {
+            matrix[i].assign(c, 0);
+            for( int j=0; j<c; j++)
+            {
+                cin>>matrix[i][j];
+            }
+        }
+
+        Solution ob;
+        vector<int> result = ob.spirallyTraverse(matrix, r, c);
+        for (int i = 0; i < result.size(); ++i)
+                cout<<result[i]<<" ";
+        cout<<endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
+
+
+//sort 2d matrix
+
+// { Driver Code Starts
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+// User function Template for C++
+
+class Solution {
+  public:
+    vector<vector<int>> sortedMatrix(int N, vector<vector<int>> Mat) {
+        // code here
+        int n=Mat.size();
+        int m=Mat[0].size();
+        vector<int>ans;
+        vector<vector<int>>ans1;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                ans.push_back(Mat[i][j]);
+            }
+        }
+        sort(ans.begin(),ans.end());
+        int s=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++,s++){
+                Mat[i][j]=ans[s];
+            }
+        }
+        return Mat;
+    }
+};
+
+// { Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        cin >> N;
+        vector<vector<int>> v(N, vector<int>(N));
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++) cin >> v[i][j];
+        Solution ob;
+        v = ob.sortedMatrix(N, v);
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) cout << v[i][j] << " ";
+            cout << "\n";
+        }
+    }
+}  // } Driver Code Ends
