@@ -1,0 +1,226 @@
+// even after odd linked list
+
+
+
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+Node *evenAfterOdd(Node *head)
+{
+    //write your code here
+    if(head==NULL || head->next==NULL) return head;
+    Node* ohead=NULL;
+    Node* otail=NULL;
+    Node* ehead=NULL;
+    Node* etail=NULL;
+    while(head!=NULL){
+
+
+        if(head->data%2!=0){
+            if(ohead==NULL && otail==NULL){
+                ohead=head;
+                otail=head;
+                head=head->next;
+            }
+            // if(head!=NULL){
+            else
+                if(head->data%2!=0){
+                    otail->next=head;
+                    otail=head;
+                    head=head->next;
+                }
+            // head=head->next;
+
+            // }
+
+        }else{
+            if(ehead==NULL &&etail==NULL){
+                ehead=head;
+                etail=head;
+                head=head->next;
+            }
+            else
+                // if(head!=NULL){
+                if(head->data%2==0){
+                    etail->next=head;
+                    etail=head;
+                    head=head->next;
+                }
+            // head=head->next;
+
+            // }
+        }
+    }
+    if(ohead==NULL){
+        etail->next = NULL;
+        return ehead;
+    }
+    otail->next = ehead;
+    if(etail!=NULL)
+        etail->next = NULL;
+    return ohead;
+    //  if(otail!=NULL){
+    //     otail->next=NULL;
+    // }
+    // if(etail!=NULL){
+    //     etail->next=NULL;
+    // }
+    // return ohead;
+
+
+
+
+}
+#include <iostream>
+
+class Node
+{
+public:
+	int data;
+	Node *next;
+	Node(int data)
+	{
+		this->data = data;
+		this->next = NULL;
+	}
+};
+
+using namespace std;
+#include "solution.h"
+
+Node *takeinput()
+{
+	int data;
+	cin >> data;
+	Node *head = NULL, *tail = NULL;
+	while (data != -1)
+	{
+		Node *newnode = new Node(data);
+		if (head == NULL)
+		{
+			head = newnode;
+			tail = newnode;
+		}
+		else
+		{
+			tail->next = newnode;
+			tail = newnode;
+		}
+		cin >> data;
+	}
+	return head;
+}
+
+void print(Node *head)
+{
+	Node *temp = head;
+	while (temp != NULL)
+	{
+		cout << temp->data << " ";
+		temp = temp->next;
+	}
+	cout << endl;
+}
+
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--)
+	{
+		Node *head = takeinput();
+		head = evenAfterOdd(head);
+		print(head);
+	}
+	return 0;
+}
+
+
+//find node recursively
+
+
+/****************************************************************
+ 
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+int findNodeRec(Node *head, int n)
+{
+	//Write your code here
+    if(head==NULL) return -1;
+  
+    if(head->data==n) return 0;
+      int x=findNodeRec(head->next,n);
+    if(x==-1)
+    {return -1;}
+    else
+        return x+1;;
+}
+
+
+//reverse linked list iteratively
+
+
+
+/****************************************************************
+ 
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+Node *reverseLinkedList(Node *head) {
+    
+    // Write your code here
+    if(head==NULL ||head->next==NULL) return head;
+    Node* curr=head;
+    Node* prev=NULL;
+    while(curr!=NULL){
+        Node* nextt=curr->next;
+        curr->next=prev;
+ 
+         prev=curr;
+        curr=nextt;
+       
+    }
+    return  prev;
+}
